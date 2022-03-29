@@ -36,7 +36,6 @@ def print_date(startDate, endDate):
     DF = DF.set_index(date_time)
     plt.plot(DF)
     plt.gcf().autofmt_xdate()
-    plt.show()
     plt.savefig('plot.png')
 
 
