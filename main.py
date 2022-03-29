@@ -38,6 +38,8 @@ def print_date(startDate, endDate):
     plt.gcf().autofmt_xdate()
     plt.savefig('plot.png')
 
+    return dict
+
 
 if __name__ == '__main__':
     print_date(args.StartDate, args.EndDate)
