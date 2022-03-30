@@ -1,13 +1,8 @@
 import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
-import os
-from dotenv import load_dotenv
 
 import functions
-
-load_dotenv()
-URL= os.getenv('USER_BASE_URL')
 
 
 ap = argparse.ArgumentParser(description='Stat About Userbase Growth');
@@ -15,23 +10,22 @@ ap.add_argument('StartDate', type=str , help='Please enter the start date in thi
 ap.add_argument('EndDate', type=str , help='Please enter the end date in this format : DD-MM-YY')
 args = ap.parse_args()
 
-def print_date(startDate, endDate):
+# filter user activity by date range passed as CLI arguments
+dict = functions.filter_date(args.StartDate, args.EndDate)
 
-    dict = functions.filter_date(startDate, endDate)
+# parse dates & set dataframe
+date_time = pd.to_datetime([*dict])
+data = dict.values()
+DF = pd.DataFrame()
+DF['value'] = data
+DF = DF.set_index(date_time)
 
-    date_time = pd.to_datetime([*dict])
-    data = dict.values()
-
-    DF = pd.DataFrame()
-    DF['value'] = data
-    DF = DF.set_index(date_time)
-    plt.plot(DF)
-    plt.gcf().autofmt_xdate()
-    plt.savefig('plot.png')
-    plt.show()
-
-    return dict
-
-
-if __name__ == '__main__':
-    print_date(args.StartDate, args.EndDate)
+# plot the graph
+plt.plot(DF)
+plt.title('Userbase Activity')
+plt.xlabel('Dates')
+plt.ylabel('Active Users')
+plt.legend('growth')
+plt.gcf().autofmt_xdate()
+plt.savefig('plot.png')
+plt.show()

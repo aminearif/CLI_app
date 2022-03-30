@@ -1,16 +1,11 @@
 import datetime
 import requests
 import time
-import matplotlib.pyplot as plt
-import pandas as pd
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 URL= os.getenv('USER_BASE_URL')
-
-def format_date(data):
-    return datetime.strptime(data, '%d-%m-%Y')
 
 def filter_date(startDate, endDate):
     # Request user base
@@ -27,6 +22,5 @@ def filter_date(startDate, endDate):
         if (dateKey in range(dateStart1, dateEnd1 + 1)):
             valuedict = value
             dict.update({datetime.datetime.fromtimestamp(dateKey): valuedict})
-    print(dict)
     return dict
 
