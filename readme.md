@@ -25,6 +25,9 @@ python3 main.py 02-01-2022 08-01-2022
 
 ```
 
+#### 2.1 Invalid input
+in case you pass an invalid date arguments or ones that are not in the json object you should get an empty plot.png that will be updated on the project folder
+
 ### 3. Run Tests (Unit test + Network test are in the same file, you can check the logic)
 
 ```bash
