@@ -37,10 +37,10 @@ def print_date(startDate, endDate):
     plt.plot(DF)
     plt.gcf().autofmt_xdate()
     plt.savefig('plot.png')
+    plt.show()
 
     return dict
 
 
 if __name__ == '__main__':
     print_date(args.StartDate, args.EndDate)
-
