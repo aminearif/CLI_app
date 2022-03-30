@@ -29,3 +29,5 @@ plt.legend('growth')
 plt.gcf().autofmt_xdate()
 plt.savefig('plot.png')
 plt.show()
+
+print(dict)
