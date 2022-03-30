@@ -7,6 +7,8 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
+import functions
+
 load_dotenv()
 URL= os.getenv('USER_BASE_URL')
 
@@ -17,22 +19,8 @@ ap.add_argument('EndDate', type=str , help='Please enter the end date in this fo
 args = ap.parse_args()
 
 def print_date(startDate, endDate):
-    # Request user base
-    userBase = requests.get(URL)
-    jsonUserBase= userBase.json().items()
-    dict = {}
 
-    # convert date to timestamp for comparing purposes
-    dateStart1 = int(time.mktime(datetime.datetime.strptime(startDate, '%d-%m-%Y').timetuple()))
-    dateEnd1 = int(time.mktime(datetime.datetime.strptime(endDate, '%d-%m-%Y').timetuple()))
-
-    for key, value in jsonUserBase :
-        dateKey = int(time.mktime(datetime.datetime.strptime(key, '%d-%m-%Y').timetuple()))
-        if (dateKey in range(dateStart1,dateEnd1+1)):
-            valuedict = value
-            dict.update({dateKey : valuedict})
-        else:
-            print("Date is not in range")
+    dict = functions.filter_date(startDate, endDate)
 
     date_time = pd.to_datetime([*dict])
     data = dict.values()
@@ -44,8 +32,6 @@ def print_date(startDate, endDate):
     plt.gcf().autofmt_xdate()
     plt.savefig('plot.png')
     plt.show()
-
-    return dict
 
 
 if __name__ == '__main__':
