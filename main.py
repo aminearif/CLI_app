@@ -1,7 +1,4 @@
 import argparse
-import datetime
-import requests
-import time
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
@@ -32,6 +29,8 @@ def print_date(startDate, endDate):
     plt.gcf().autofmt_xdate()
     plt.savefig('plot.png')
     plt.show()
+
+    return dict
 
 
 if __name__ == '__main__':

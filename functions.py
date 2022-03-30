@@ -26,7 +26,7 @@ def filter_date(startDate, endDate):
         dateKey = int(time.mktime(datetime.datetime.strptime(key, '%d-%m-%Y').timetuple()))
         if (dateKey in range(dateStart1, dateEnd1 + 1)):
             valuedict = value
-            dict.update({dateKey: valuedict})
-
+            dict.update({datetime.datetime.fromtimestamp(dateKey): valuedict})
+    print(dict)
     return dict
 
