@@ -4,6 +4,12 @@ import requests
 import time
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+URL= os.getenv('USER_BASE_URL')
+
 
 ap = argparse.ArgumentParser(description='Stat About Userbase Growth');
 ap.add_argument('StartDate', type=str , help='Please enter the start date in this format : DD-MM-YY')
@@ -12,7 +18,7 @@ args = ap.parse_args()
 
 def print_date(startDate, endDate):
     # Request user base
-    userBase = requests.get("http://sam-user-activity.eu-west-1.elasticbeanstalk.com/")
+    userBase = requests.get(URL)
     jsonUserBase= userBase.json().items()
     dict = {}
 
